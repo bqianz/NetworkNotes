@@ -25,7 +25,7 @@ networks)
 by point-to-point communication links (usually WAN are such networks)
 
 ## Internet Backbone:
--a switched network of interconnected routers
+- a switched network of interconnected routers
 
 ## Circuit Switching:
 - dedicated physical path connect source and destination end-systems
@@ -53,7 +53,7 @@ exchange point)
 - **Tier3** networks are local ISPs; customers of Tier1/2
 
 ## Delay
-- ** circuit switching** delay = connection set-up time + signal 
+- **circuit switching** delay = connection set-up time + signal 
 propagation time
 - **packet switching** delay:
 	- delay at one router defined as the time from a packet arriving at 
@@ -94,7 +94,7 @@ services provided by layer n-1
 - netwokr access layer: data exchange between end device and network
 - physical layer: access to physical medium
 
-##Protocal Data Unit (PDU)
+## Protocal Data Unit (PDU)
 - data packet which contains data from the next higher layer, head which 
 contains control information
 
