@@ -1,4 +1,5 @@
-CMPT 371 Chapter 1 Notes
+# CMPT 371 Chapter 1 Notes
+
 [Source](https://www.cs.sfu.ca/CourseCentral/371/qgu/)
 
 - **IP protocol** specifies the format of the information sent and received 
