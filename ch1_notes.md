@@ -18,7 +18,7 @@ identifications scheme (aka addressing scheme)
 network
 
 ## Network classification
-- **broadcast network:* a single communication medium shared by all 
+- **broadcast network:** a single communication medium shared by all 
 end-systems attached (usuall LAN covering a building, campus etc are broadcast 
 networks)
 - **point-to-point** (switched) network: end-systems and switches connected 
