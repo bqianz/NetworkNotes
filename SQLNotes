@@ -1,0 +1,110 @@
+SQL Notes taken from https://www.w3schools.com/sql/
+
+## Comments
+- `\* Comments *\` or `--` for single line
+
+## Stored Procedure
+Example:
+- procedure definition:
+```
+CREATE PROCEDURE SelectAllCustomers @City nvarchar(30), @PostalCode nvarchar(10)
+AS
+SELECT * FROM Customers WHERE City = @City AND PostalCode = @PostalCode
+GO;
+```
+- calling:
+```
+EXEC SelectAllCustomers City = "London", PostalCode = "WA1 1DP";
+```
+- note: `nvarchar(n)` is variable-length string data
+
+## IFNULL()
+Allows you to return an alternative value if an expression is NULL.
+- Example: suppose UnitsOnOrder has some null entries, then
+```
+SELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))
+FROM Products;
+```
+
+## Case
+Syntax:
+```
+CASE
+    WHEN condition1 THEN result1
+    WHEN condition2 THEN result2
+    WHEN conditionN THEN resultN
+    ELSE result
+END;
+```
+
+## INSERT INTO __ SELECT __
+ - Inserts into existing Table
+Syntax:
+```
+INSERT INTO table2 (column1, column2, column3, ...)
+SELECT column1, column2, column3, ...
+FROM table1
+WHERE condition;
+```
+## SELECT INTO
+- Inserts into new table
+Syntax:
+```
+SELECT column1, column2, column3, ...
+INTO newtable IN 'externaldb.mdb'
+FROM oldtable
+WHERE condition;
+```
+
+Ex: Create new, empty table
+```
+SELECT * INTO newtable
+FROM oldtable
+WHERE 1 = 0;
+```
+
+Ex: copies data from more than one table
+```
+SELECT Customers.CustomerName, Orders.OrderID
+INTO CustomersOrderBackup2017
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+```
+
+## ANY, ALL
+- used in combination with SELECT, WHERE or HAVING
+
+- __ANY__ instances of a certain condition
+```
+SELECT ProductName
+FROM Products
+WHERE ProductID = ANY (SELECT ProductID FROM OrderDetails WHERE Quantity > 99);
+```
+- The __ALL__ operator returns TRUE iff all of the subqueries values meet the condition (__the condition containing ALL, not the conditioned contained inside ALL__). The ALL must be preceded by comparison operators and evaluates true if all of the subqueries values meet the condition.
+```
+SELECT column_name(s)
+FROM table_name
+WHERE column_name comparison_operator ALL
+(SELECT column_name
+FROM table_name
+WHERE condition(s));
+```
+
+## EXISTS
+- if there exists any
+```
+SELECT SupplierName
+FROM Suppliers
+WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
+```
+
+## HAVING
+-replaces `WHERE` when preceding aggregate functions (a function where the values of multiple rows are grouped together to form a single summary value.)
+-often used in combination with `GROUP BY`
+
+```
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5;
+```
